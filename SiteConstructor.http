@@ -1,0 +1,6 @@
+@SiteConstructor_HostAddress = http://localhost:5272
+
+GET {{SiteConstructor_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
