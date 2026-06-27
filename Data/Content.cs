@@ -10,7 +10,6 @@ public class Content
 
 public class Hero
 {
-    public string Title{get; set;} = "";
     public string Subtitle{get; set;} = "";
     public List<Stat> Stats{get; set;} = new();
 }

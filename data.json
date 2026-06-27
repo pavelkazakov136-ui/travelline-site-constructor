@@ -1,16 +1,24 @@
 {
-    "hero":{
-        "title": "TL:Teach",
+    "hero": {
         "subtitle": "Стабильно растем\nи принимаем новые вызовы\nTravelTech индустрии",
-        "stats" :[
+        "stats": [
             {"value": "с 2008 года", "label": "создаем инструменты\nдля отельеров"},
-            {"value": "300+", "label": "сотрудников в техотделе\nи более 700 в компании"}
+            {"value": "300+", "label": "сотрудников в техотделе\nи более 700 в компании"},
+            {"value": "12 000+", "label": "клиентов работают с нами"},
+            {"value": "топ-50", "label": "в рейтинге работодателей\nhh.ru 2022-2024 гг."},
+            {"value": ">1,5 млн", "label": "гостей в месяц\nбронируют через TravelLine"},
+            {"value": "300+", "label": "интеграций\nсо сторонними сервисами"},
+            {"value": "tl-logo.svg", "label": "аккредитованная\nIT-компания"},
+            {"value": "tl-logo.svg", "label": "серебро в рейтинге лучших\nработодателей Forbes 2024 г."}
         ]
     },
-    "team":[
-        {"id": 1, "name": "Оля Рядова", "position": "Руководитель отдела аналитики", "photo": "/images/OlyaRyadova.png"}
+    "team": [
+        {"id": 2, "name": "Оля Рядова", "position": "Руководитель отдела аналитики", "photo": "/images/OlyaRyadova.png"},
+        {"id": 1, "name": "Женя Гермогенов", "position": "Старший руководитель проектов", "photo": "/images/jenya_germogenov.png"}
     ],
-    "vacancies":[
-        { "id": 1, "title": "Аналитик данных", "format": "удалённо", "url": "https://hh.ru/vacancy/123" }
+    "vacancies": [
+        {"id": 1, "title": "Senior Site Reliability Engineer (SRE)", "format": "удалённо", "url": "https://hh.ru/vacancy/132518636"},
+        {"id": 2, "title": "Аналитик данных (финансовое направление)", "format": "удалённо", "url": "https://kazan.hh.ru/vacancy/132543183?hhtmFrom=employer_vacancies"},
+        {"id": 3, "title": "Python Developer AI team (в офис, г. Йошкар-Ола)", "format": "Йошкар-Ола", "url": "https://kazan.hh.ru/vacancy/134599368?hhtmFrom=vacancy_restore"}
     ]
 }

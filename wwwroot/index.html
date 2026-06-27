@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TL:TECH — Работа в TravelLine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header__inner">
+      <a class="header__logo" href="#">
+        <img class="header__logo-img" src="images/logo.svg" alt="TravelLine" />
+      </a>
+
+      <nav class="header__nav">
+        <ul class="header__list">
+          <li class="header__item"><a class="header__link" href="#about">О TravelLine</a></li>
+          <li class="header__item"><a class="header__link" href="#tools">Наши инструменты</a></li>
+          <li class="header__item"><a class="header__link" href="#team">Команда</a></li>
+          <li class="header__item"><a class="header__link" href="#directions">Направления</a></li>
+        </ul>
+      </nav>
+
+      <a class="header__button" href="#vacancies">Вакансии</a>
+
+    </div>
+  </header>
+  <section class="hero" id="about">
+    <video class="hero__video" autoplay muted loop playsinline
+           src="images/hero_vid.mp4"></video>
+
+    <span class="hero__overlay"></span>
+
+    <div class="hero__inner">
+      <h1 class="hero__title"></h1>
+    </div>
+  </section>
+  <section class="stats">
+    <div class="stats__grid">
+
+      <div class="stats__sticky">
+        <div class="stats__value"></div>
+      </div>
+
+      <ol class="stats__list"></ol>
+
+    </div>
+  </section>
+  <section class="team" id="team">
+    <div class="team__head">
+      <h2 class="team__title">Любим и бережем свою команду</h2>
+      <p class="team__subtitle">300+ человек, которые вдохновляют своими достижениями</p>
+    </div>
+    <div class="team__carousel">
+      <ul class="team__track">
+      </ul>
+    </div>
+  </section>
+  <section class="vacancies" id="vacancies">
+    <h2 class="vacancies__title">Ищем прямо сейчас</h2>
+
+    <div class="vacancies__scroll">
+      <ul class="vacancies__list">
+      </ul>
+    </div>
+  </section>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
