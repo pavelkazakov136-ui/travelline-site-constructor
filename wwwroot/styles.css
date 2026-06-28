@@ -378,23 +378,21 @@ ul,ol{
 }
 
 .vacancies__list{
-  display:flex;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
   gap:20px;
-  width:max-content;
 }
 
 .vacancies__item{
   position:relative;
-  flex:none;
-  display:flex;
+  display:flex;                 
   flex-direction:column;
   justify-content:space-between;
-  width:425px;
   min-height:244px;
   padding:35px 40px 40px;
   background:#f0f5ff;
   border:1px solid #f0f5ff;
-  border-radius:20px 0 20px 0;     
+  border-radius:20px 0 20px 0;
   transition:background .3s ease, border-color .3s ease;
 }
 .vacancies__item:hover{
@@ -500,11 +498,11 @@ ul,ol{
     padding:4px clamp(20px,5vw,80px);
   }
   .vacancies__list{
-    flex-direction:column;
-    width:auto;
+    grid-template-columns:1fr
   }
-  .vacancies__item{
-    width:auto;
+  .vacancies__item--more{
+    padding-left:40px;
+    padding-right:40px;
   }
   .vacancies__item--more{
     padding-left:40px;

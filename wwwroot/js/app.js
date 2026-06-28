@@ -9,12 +9,12 @@ async function loadContent() {
 }
 
 function renderHero(hero) {
-  document.querySelector('.hero__title').innerHTML = hero.subtitle.replaceAll('\n', '<br>')
-  const stats__list = document.querySelector('.stats__list')
+  document.querySelector('.hero__title').innerHTML = hero.subtitle.replaceAll('\n', '<br>');
+  const stats__list = document.querySelector('.stats__list');
   let htmlContent = hero.stats.map(stat => {
     const cleanLabel = stat.label.replaceAll('\n', '<br>')
-    return `<li class="stats__item" data-value="${stat.value}">${cleanLabel}</li>`}).join('')
-  stats__list.innerHTML = htmlContent
+    return `<li class="stats__item" data-value="${stat.value}">${cleanLabel}</li>`}).join('');
+  stats__list.innerHTML = htmlContent;
 }
 
 function renderStatValue(value) {
@@ -55,13 +55,13 @@ function renderTeam(team) {
             <span class="team__role">${personality.position}</span>
           </div>
         </li>`
-  ).join('')
-  team__track.innerHTML = htmlContent 
+  ).join('');
+  team__track.innerHTML = htmlContent; 
 }
 
 function renderVacancies(vacancies){
-  vacancies.sort((a, b) => a.id - b.id)
-  const vacancies__list = document.querySelector('.vacancies__list')
+  vacancies.sort((a, b) => a.id - b.id);
+  const vacancies__list = document.querySelector('.vacancies__list');
   let htmlContent = vacancies.map(vacancy => 
     `<li class="vacancies__item">
           <h3 class="vacancies__item-title">${vacancy.title}</h3>
@@ -71,13 +71,13 @@ function renderVacancies(vacancies){
           </div>
           <a class="vacancies__item-link" href="${vacancy.url}" target="_blank" rel="noopener" aria-label="${vacancy.title}"></a>
         </li>`
-  ).join('')
+  ).join('');
   htmlContent += 
         `<li class="vacancies__item vacancies__item--more">
           <h3 class="vacancies__item-title">Еще больше вакансий на HeadHunter →</h3>
           <a class="vacancies__item-link" href="https://yoshkar-ola.hh.ru/search/vacancy?from=employerPage&amp;hhtmFrom=employer&amp;employer_id=1136961" target="_blank" rel="noopener" aria-label="Все вакансии на HeadHunter"></a>
         </li>`
-  vacancies__list.innerHTML = htmlContent
+  vacancies__list.innerHTML = htmlContent;
 
 }
 
