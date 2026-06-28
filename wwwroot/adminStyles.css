@@ -1,0 +1,6 @@
+.inputs-field {
+  display: flex;
+  gap: var(--pico-spacing);
+  align-items: start;
+  margin-bottom: var(--pico-spacing);
+}

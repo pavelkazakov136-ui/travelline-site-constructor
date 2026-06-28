@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css">
+    <link rel="stylesheet" href="adminStyles.css" />
+  <title>Админка — TL:TECH</title>
+</head>
+<body>
+  <main>
+    <h1>Админ-панель</h1>
+
+    <section>
+      <h2>Hero</h2>
+      <label>Подзаголовок
+        <textarea id="hero-subtitle" rows="3"></textarea>
+      </label>
+
+      <h3>Статистика</h3>
+      <div id="hero-stats"></div>
+      <button id="add-stat" class="secondary">+ добавить статистику</button>
+
+      <button id="save-hero">Сохранить Hero</button>
+      <p id="hero-msg"></p>
+    </section>
+    
+    <section>
+      <h2>Карточки команды</h2>
+      <div id="team-cards"></div>
+      <button id="add-member" class="secondary">+ добавить сотрудника</button>
+      <p id="team-msg"></p>
+    </section>
+    
+    <section>
+      <h2>Вакансии</h2>
+      <div id="vacancy-cards"></div>
+      <button id="add-vacancy" class="secondary">+ добавить вакансию</button>
+      <p id="vacancy-msg"></p>
+    </section>
+
+  </main>
+
+  <script src="/js/admin_hero.js"></script>
+  <script src="/js/admin_team.js"></script>
+  <script src="/js/admin_vacancies.js"></script>
+</body>
+</html>
