@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SiteConstructor.Tests/SiteConstructor.Tests.csproj" />
+  <Project Path="SiteConstructor/SiteConstructor.csproj" />
+</Solution>
