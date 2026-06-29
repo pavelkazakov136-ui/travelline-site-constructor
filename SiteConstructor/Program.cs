@@ -1,5 +1,5 @@
 using SiteConstructor.Data;
-
+using SiteConstructor.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-
+builder.Services.AddSingleton<ContentService>();
 builder.Services.AddSingleton<IDataStore, JsonDataStore>();
 
 var app = builder.Build();
