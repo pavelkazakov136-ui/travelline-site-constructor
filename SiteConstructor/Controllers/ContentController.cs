@@ -65,4 +65,71 @@ public class ContentController : ControllerBase
         return updated is null ? NotFound() : Ok(updated);
 
     }
+
+    [HttpPost("clients")]
+    public async Task<IActionResult> AddClient([FromBody] Client client)
+        => Ok(await _service.AddClientAsync(client));
+
+    [HttpPut("clients/{id}")]
+    public async Task<IActionResult> UpdateClient(int id, [FromBody] Client client)
+    {
+        var updated = await _service.UpdateClientAsync(id, client);
+        return updated is null ? NotFound() : Ok(updated);
+    }
+
+    [HttpDelete("clients/{id}")]
+    public async Task<IActionResult> DeleteClient(int id)
+    {
+        await _service.DeleteClientAsync(id);
+        return NoContent();
+    }
+
+    [HttpPost("gallery")]
+    public async Task<IActionResult> AddGalleryItem([FromBody] GalleryItem galleryItem)
+    {
+        var created = await _service.AddGalleryItemAsync(galleryItem);
+        return Ok(created);
+    }
+
+    [HttpPut("gallery/{id}")]
+    public async Task<IActionResult> UpdateGalleryItem(int id, [FromBody] GalleryItem galleryItem)
+    {
+        var updated = await _service.UpdateGalleryItemAsync(id, galleryItem);
+        return updated is null ? NotFound() : Ok(updated);
+    }
+
+    [HttpDelete("gallery/{id}")]
+    public async Task<IActionResult> DeleteGalleryItem(int id)
+    {
+        await _service.DeleteGalleryItemAsync(id);
+        return NoContent();
+    }
+
+        [HttpPost("bonuses")]
+    public async Task<IActionResult> AddBonus([FromBody] Bonus bonus)
+    {
+        var created = await _service.AddBonusAsync(bonus);
+        return Ok(created);
+    }
+
+    [HttpPut("bonuses/{id}")]
+    public async Task<IActionResult> UpdateBonus(int id, [FromBody] Bonus bonus)
+    {
+        var updated = await _service.UpdateBonusAsync(id, bonus);
+        return updated is null ? NotFound() : Ok(updated);
+    }
+
+    [HttpDelete("bonuses/{id}")]
+    public async Task<IActionResult> DeleteBonus(int id)
+    {
+        await _service.DeleteGalleryItemAsync(id);
+        return NoContent();
+    }
+    
+    [HttpPut("form")]
+    public async Task<IActionResult> UpdateForm([FromBody] Form form)
+    {
+        var updated = await _service.UpdateFormAsync(form);
+        return Ok(updated);
+    }
 } 

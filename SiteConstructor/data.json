@@ -20,5 +20,21 @@
         {"id": 1, "title": "Senior Site Reliability Engineer (SRE)", "format": "удалённо", "url": "https://hh.ru/vacancy/132518636"},
         {"id": 2, "title": "Аналитик данных (финансовое направление)", "format": "удалённо", "url": "https://kazan.hh.ru/vacancy/132543183?hhtmFrom=employer_vacancies"},
         {"id": 3, "title": "Python Developer AI team (в офис, г. Йошкар-Ола)", "format": "Йошкар-Ола", "url": "https://kazan.hh.ru/vacancy/134599368?hhtmFrom=vacancy_restore"}
-    ]
+    ],
+    "clients": [
+        {"id":1, "logo": "ohta-park.svg", "name": "ohta park"},
+        {"id":2, "logo": "sochi-park.svg", "name": "sochi park"},
+        {"id":3, "logo": "cosmos.svg", "name": "cosmos"}
+    ],
+    "gallery": [
+        {"id": 1, "title": "Оля Рядова", "media": "/images/OlyaRyadova.png"},
+        {"id": 2, "title": "Женя Гермогенов", "media": "/images/jenya_germogenov.png"}
+    ],
+    "bonuses":[
+        {"id": 1, "title": "Онбординг в компанию", "subtitle": "Наставник поможет быстро включиться в работу."},
+        {"id": 2, "title": "Поездки и обучение", "subtitle":"Курсы, конференции, мастер-классы за счет компании. Корпоративная библиотека и тренинги для тех, кто любит учиться."}
+
+    ],
+    "form": {"title": "Напиши нам", "subtitle": "описание", "button": "отправить"}
+
 }

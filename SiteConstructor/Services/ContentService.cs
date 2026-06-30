@@ -78,4 +78,94 @@ public class ContentService
         return existing;
 
     }
+
+    public async Task<Client> AddClientAsync(Client client)
+    {
+        var content = await _store.ReadAsync();
+        client.Id = content.Clients.Count > 0 ? content.Clients.Max(c => c.Id) + 1 : 1;
+        content.Clients.Add(client);
+        await _store.WriteAsync(content);
+        return client;
+    }
+
+    public async Task<Client?> UpdateClientAsync(int id, Client client)
+    {
+        var content = await _store.ReadAsync();
+        var existing = content.Clients.FirstOrDefault(c => c.Id == id);
+        if (existing is null) return null;
+        existing.Logo = client.Logo;
+        existing.Name = client.Name;
+        await _store.WriteAsync(content);
+        return existing;
+    }
+
+    public async Task DeleteClientAsync(int id)
+    {
+        var content = await _store.ReadAsync();
+        content.Clients.RemoveAll(c => c.Id == id);
+        await _store.WriteAsync(content);
+    }
+
+    public async Task<GalleryItem> AddGalleryItemAsync(GalleryItem galleryItem)
+    {
+        var content = await _store.ReadAsync();
+        galleryItem.Id = content.Gallery.Count > 0 ? content.Gallery.Max(g => g.Id) + 1 : 1;
+        content.Gallery.Add(galleryItem);
+        await _store.WriteAsync(content);
+        return galleryItem;
+    }
+
+    public async Task<GalleryItem?> UpdateGalleryItemAsync(int id, GalleryItem galleryItem)
+    {
+        var content = await _store.ReadAsync();
+        var existing = content.Gallery.FirstOrDefault(g => g.Id == id);
+        if (existing is null) return null;
+        existing.Media = galleryItem.Media;
+        existing.Title = galleryItem.Title;
+        await _store.WriteAsync(content);
+        return existing;
+
+    }
+    public async Task DeleteGalleryItemAsync(int id)
+    {
+        var content = await _store.ReadAsync();
+        content.Gallery.RemoveAll(g => g.Id == id);
+        await _store.WriteAsync(content);
+    }
+
+        public async Task<Bonus> AddBonusAsync(Bonus bonus)
+    {
+        var content = await _store.ReadAsync();
+        bonus.Id = content.Bonuses.Count > 0 ? content.Bonuses.Max(g => g.Id) + 1 : 1;
+        content.Bonuses.Add(bonus);
+        await _store.WriteAsync(content);
+        return bonus;
+    }
+
+    public async Task<Bonus?> UpdateBonusAsync(int id, Bonus bonus)
+    {
+        var content = await _store.ReadAsync();
+        var existing = content.Bonuses.FirstOrDefault(g => g.Id == id);
+        if (existing is null) return null;
+        existing.Subtitle = bonus.Subtitle;
+        existing.Title = bonus.Title;
+        await _store.WriteAsync(content);
+        return existing;
+
+    }
+    public async Task DeleteBonusAsync(int id)
+    {
+        var content = await _store.ReadAsync();
+        content.Bonuses.RemoveAll(b => b.Id == id);
+        await _store.WriteAsync(content);
+    }
+
+    public async Task<Form> UpdateFormAsync(Form form)
+    {
+        var content = await _store.ReadAsync();
+        content.Form = form;
+        await _store.WriteAsync(content);
+        return form;
+
+    }
 }
