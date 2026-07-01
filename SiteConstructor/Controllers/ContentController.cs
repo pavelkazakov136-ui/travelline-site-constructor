@@ -122,7 +122,7 @@ public class ContentController : ControllerBase
     [HttpDelete("bonuses/{id}")]
     public async Task<IActionResult> DeleteBonus(int id)
     {
-        await _service.DeleteGalleryItemAsync(id);
+        await _service.DeleteBonusAsync(id);
         return NoContent();
     }
     
