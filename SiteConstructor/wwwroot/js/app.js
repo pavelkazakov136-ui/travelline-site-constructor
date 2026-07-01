@@ -2,10 +2,14 @@ async function loadContent() {
   const res = await fetch('/api/content'); 
   const data = await res.json(); 
   
-  renderHero(data.hero)
-  renderTeam(data.team)
-  renderVacancies(data.vacancies)
-  setupStatsScroll() 
+  renderHero(data.hero);
+  renderTeam(data.team);
+  renderClients(data.clients);
+  renderBonus(data.bonuses); 
+  renderForm(data.form); 
+  renderVacancies(data.vacancies);
+  renderGallery(data.gallery);
+  setupStatsScroll();
 }
 
 function renderHero(hero) {
@@ -79,6 +83,69 @@ function renderVacancies(vacancies){
         </li>`
   vacancies__list.innerHTML = htmlContent;
 
+}
+
+function renderClients(clients) {
+  clients.sort((a, b) => a.id - b.id);
+  const track = document.querySelector('.clients__track');
+  const renderItem = (client, isDuplicate = false) => `
+    <li class="clients__item" ${isDuplicate ? 'aria-hidden="true"' : ''}>
+      <img class="clients__logo" src="images/${client.logo}" alt="${client.name}" />
+    </li>`;
+
+  const original  = clients.map(c => renderItem(c)).join('');
+  const duplicate = clients.map(c => renderItem(c, true)).join('');
+
+  track.innerHTML = original + duplicate;
+}
+
+function renderGallery(gallery) {
+  const grid = document.querySelector('.gallery__grid');
+
+  const cols = [[], [], []];
+  gallery.forEach((item, i) => cols[i % 3].push(item));
+
+  const renderMedia = (item) => {
+    const isVideo = item.media.endsWith('.mp4');
+    return isVideo
+      ? `<video class="gallery__media" src="${item.media}" autoplay muted loop playsinline></video>`
+      : `<img class="gallery__media" src="${item.media}" alt="" loading="lazy">`;
+  };
+
+  grid.innerHTML = cols.map(col => `
+    <div class="gallery__col">
+      ${col.map(item => `
+        <div class="gallery__item">
+          ${renderMedia(item)}
+          <p class="gallery__caption">${item.title.replaceAll('\n', '<br>')}</p>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+function renderBonus(bonuses) {
+  const grid = document.querySelector('.bonus__grid');
+  const colors = ['#8b5cf6', '#22a55c', '#f97316', '#3b82f6', '#ec4899', '#06b6d4'];
+  const cols = [[], [], []];
+  bonuses.forEach((item, i) => cols[i % 3].push({ ...item, color: colors[i % colors.length] }));
+
+  grid.innerHTML = cols.map(col => `
+    <div class="bonus__col">
+      ${col.map(item => `
+        <div class="bonus__card">
+          <h3 class="bonus__card-title" style="color:${item.color}">${item.title}</h3>
+          <p class="bonus__card-text">${item.subtitle}</p>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+function renderForm(form) {
+  document.querySelector('.contact__title').textContent = form.title;
+  document.querySelector('.contact__subtitle').textContent = form.subtitle;
+  document.querySelector('.contact__submit').textContent = form.button;
 }
 
 loadContent();   
