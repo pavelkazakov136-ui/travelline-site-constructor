@@ -18,6 +18,20 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.Use(async (context, next) =>
+{
+    try
+    {
+        await next(); 
+    }
+    catch (ArgumentException ex)
+    {
+        context.Response.StatusCode = StatusCodes.Status400BadRequest;
+        context.Response.ContentType = "application/json";        
+        await context.Response.WriteAsJsonAsync(new { error = ex.Message });
+    }
+});
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

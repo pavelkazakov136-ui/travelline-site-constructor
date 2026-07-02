@@ -28,7 +28,7 @@ async function addGallery(){
     const res = await fetch('/api/content/gallery',{
         method:'POST',
         headers:{'content-Type': 'application/json'},
-        body: JSON.stringify({title: '', media: ''})
+        body: JSON.stringify({title: 'Текс', media: ''})
     });
     if (res.ok) loadGallery()
 }

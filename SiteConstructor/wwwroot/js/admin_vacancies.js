@@ -30,7 +30,7 @@ async function addVacancy(){
     const res = await fetch("/api/content/vacancies",{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: '', format: '', url: '' })
+        body: JSON.stringify({ title: 'Название', format: '', url: '' })
   });
   if (res.ok) loadVacancies();
 }

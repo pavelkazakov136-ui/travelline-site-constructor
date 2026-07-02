@@ -28,7 +28,7 @@ async function addBonus(){
     const res = await fetch('/api/content/bonuses',{
         method:'POST',
         headers:{'content-Type': 'application/json'},
-        body: JSON.stringify({title: '', subtitle: ''})
+        body: JSON.stringify({title: 'Заголовок', subtitle: ''})
     });
     if (res.ok) loadBonuses()
 }

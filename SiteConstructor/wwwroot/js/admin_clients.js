@@ -28,7 +28,7 @@ async function addClient(){
     const res = await fetch('/api/content/clients',{
         method:'POST',
         headers:{'content-Type': 'application/json'},
-        body: JSON.stringify({logo: '', name: ''})
+        body: JSON.stringify({logo: '', name: 'Название'})
     });
     if (res.ok) loadClients()
 }

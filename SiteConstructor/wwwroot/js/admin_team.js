@@ -31,7 +31,7 @@ async function addMember() {
   const res = await fetch('/api/content/team', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: '', position: '', photo: '' })
+    body: JSON.stringify({ name: 'Имя', position: '', photo: '' })
   });
   if (res.ok) loadTeam();  
 }

@@ -11,6 +11,14 @@ public class ContentService
         _store = store;
     }
 
+    private void ValidateRequired(string value, string fieldName)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            throw new ArgumentException($"{fieldName} is required and cannot be empty.");
+        } 
+    }
+
     public async Task<Content> GetAsync()
     {
         var content = await _store.ReadAsync();
@@ -27,14 +35,17 @@ public class ContentService
 
     public async Task<TeamMember> AddTeamMemberAsync(TeamMember member)
     {
+        ValidateRequired(member.Name, "Name");
         var content = await _store.ReadAsync();
         member.Id = content.Team.Count > 0 ? content.Team.Max(m => m.Id) + 1 : 1;
         content.Team.Add(member);
         await _store.WriteAsync(content);
         return member;
     }
+
     public async Task<TeamMember?> UpdateTeamMemberAsync(int id, TeamMember member)
     {
+        ValidateRequired(member.Name, "Name");
         var content = await _store.ReadAsync();
         var existing = content.Team.FirstOrDefault(m => m.Id == id);
         if (existing is null) return null;
@@ -54,6 +65,7 @@ public class ContentService
 
     public async Task<Vacancy> AddVacancyAsync(Vacancy vacancy)
     {
+        ValidateRequired(vacancy.Title, "Title");
         var content = await _store.ReadAsync();
         vacancy.Id = content.Vacancies.Count > 0 ? content.Vacancies.Max(v => v.Id) + 1 : 1;
         content.Vacancies.Add(vacancy);
@@ -68,6 +80,7 @@ public class ContentService
     }
     public async Task<Vacancy?> UpdateVacancyAsync(int id, Vacancy vacancy)
     {
+        ValidateRequired(vacancy.Title, "Title");
         var content = await _store.ReadAsync();
         var existing = content.Vacancies.FirstOrDefault(v => v.Id == id);
         if (existing is null) return null;
@@ -81,6 +94,7 @@ public class ContentService
 
     public async Task<Client> AddClientAsync(Client client)
     {
+        ValidateRequired(client.Name, "Name");
         var content = await _store.ReadAsync();
         client.Id = content.Clients.Count > 0 ? content.Clients.Max(c => c.Id) + 1 : 1;
         content.Clients.Add(client);
@@ -90,6 +104,7 @@ public class ContentService
 
     public async Task<Client?> UpdateClientAsync(int id, Client client)
     {
+        ValidateRequired(client.Name, "Name");
         var content = await _store.ReadAsync();
         var existing = content.Clients.FirstOrDefault(c => c.Id == id);
         if (existing is null) return null;
@@ -108,6 +123,7 @@ public class ContentService
 
     public async Task<GalleryItem> AddGalleryItemAsync(GalleryItem galleryItem)
     {
+        ValidateRequired(galleryItem.Title, "Title");
         var content = await _store.ReadAsync();
         galleryItem.Id = content.Gallery.Count > 0 ? content.Gallery.Max(g => g.Id) + 1 : 1;
         content.Gallery.Add(galleryItem);
@@ -117,6 +133,7 @@ public class ContentService
 
     public async Task<GalleryItem?> UpdateGalleryItemAsync(int id, GalleryItem galleryItem)
     {
+        ValidateRequired(galleryItem.Title, "Title");
         var content = await _store.ReadAsync();
         var existing = content.Gallery.FirstOrDefault(g => g.Id == id);
         if (existing is null) return null;
@@ -135,6 +152,7 @@ public class ContentService
 
         public async Task<Bonus> AddBonusAsync(Bonus bonus)
     {
+        ValidateRequired(bonus.Title, "Title");
         var content = await _store.ReadAsync();
         bonus.Id = content.Bonuses.Count > 0 ? content.Bonuses.Max(g => g.Id) + 1 : 1;
         content.Bonuses.Add(bonus);
@@ -144,6 +162,7 @@ public class ContentService
 
     public async Task<Bonus?> UpdateBonusAsync(int id, Bonus bonus)
     {
+        ValidateRequired(bonus.Title, "Title");
         var content = await _store.ReadAsync();
         var existing = content.Bonuses.FirstOrDefault(g => g.Id == id);
         if (existing is null) return null;
