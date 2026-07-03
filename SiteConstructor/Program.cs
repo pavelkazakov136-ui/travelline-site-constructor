@@ -1,16 +1,41 @@
 using SiteConstructor.Data;
 using SiteConstructor.Services;
+using Microsoft.EntityFrameworkCore;
+using SiteConstructor.Models;
+using System.Text.Json;
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddSingleton<ContentService>();
-builder.Services.AddSingleton<IDataStore, JsonDataStore>();
-
+builder.Services.AddScoped<ContentService>();
+builder.Services.AddScoped<IDataStore, PostgresDataStore>();
+builder.Services.AddDbContext<AppDbContext>(o => o.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var store = scope.ServiceProvider.GetRequiredService<IDataStore>();
+    if (!await db.TeamMembers.AnyAsync())
+    {
+        if (File.Exists("data.json"))
+        {
+            var json = await File.ReadAllTextAsync("data.json");
+            var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                PropertyNameCaseInsensitive = true
+            };
+
+            var content = JsonSerializer.Deserialize<Content>(json, options)!;
+            await store.WriteAsync(content);
+        }
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
