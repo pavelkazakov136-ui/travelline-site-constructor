@@ -1,5 +1,6 @@
 using SiteConstructor.Data;
 using SiteConstructor.Models;
+using System.Text.Json;
 
 namespace SiteConstructor.Tests;
 
@@ -14,7 +15,9 @@ public class FakeDataStore : IDataStore
 
     public Task<Content> ReadAsync()
     {
-        return Task.FromResult(_content);   // просто вернуть из памяти
+        var json = JsonSerializer.Serialize(_content);
+        var copy = JsonSerializer.Deserialize<Content>(json)!;
+        return Task.FromResult(copy);
     }
 
     public Task WriteAsync(Content content)
