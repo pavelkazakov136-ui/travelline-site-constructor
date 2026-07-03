@@ -25,8 +25,8 @@
         {"id":1, "logo": "ohta-park.svg", "name": "ohta park"},
         {"id":2, "logo": "sochi-park.svg", "name": "sochi park"},
         {"id":3, "logo": "cosmos.svg", "name": "cosmos"},
-        {"id":4, "logo": "sochi-park.svg", "name": "helvetia.svg"},
-        {"id":5, "logo": "cosmos.svg", "name": "aquaclub.svg"}
+        {"id":4, "logo": "sochi-park.svg", "name": "sochi-park"},
+        {"id":5, "logo": "premium-park.svg", "name": "premium-park"}
     ],
     "gallery": [
         {"id": 1, "title": "— Лена рассказывает студентам, что у нас на работе бесплатные обеды", "media": "/images/Lena.png"},
