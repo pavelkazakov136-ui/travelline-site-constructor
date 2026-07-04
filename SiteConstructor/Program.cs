@@ -19,6 +19,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await db.Database.MigrateAsync(); 
     var store = scope.ServiceProvider.GetRequiredService<IDataStore>();
     if (!await db.TeamMembers.AnyAsync())
     {
