@@ -4,3 +4,24 @@
   align-items: start;
   margin-bottom: var(--pico-spacing);
 }
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 100vh;
+  padding: 1rem;
+  border-right: 1px solid gray;
+}
+
+.sidebar a {
+  display: block;
+  padding: 0.5rem;
+  text-decoration: none;
+}
+
+body {
+  padding-left: 200px; 
+}
+

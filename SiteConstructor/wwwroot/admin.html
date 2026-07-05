@@ -8,10 +8,23 @@
   <title>Админка — TL:TECH</title>
 </head>
 <body>
+
+  <aside class="sidebar">
+    <nav>
+      <a href="#hero">Hero</a>
+      <a href="#team">Команда</a>
+      <a href="#vacancies">Вакансии</a>
+      <a href="#clients">Клиенты</a>
+      <a href="#gallery">Галерея</a>
+      <a href="#bonuses">Плюшки</a>
+      <a href="#form-section">Форма</a>
+    </nav>
+  </aside>
   <main>
     <h1>Админ-панель</h1>
+    <button id="logout-btn">Выйти</button>
 
-    <section>
+    <section id="hero">
       <h2>Hero</h2>
       <label>Подзаголовок
         <textarea id="hero-subtitle" rows="3"></textarea>
@@ -25,49 +38,50 @@
       <p id="hero-msg"></p>
     </section>
     
-    <section>
+    <section id="team">
       <h2>Карточки команды</h2>
       <div id="team-cards"></div>
       <button id="add-member" class="secondary">+ добавить сотрудника</button>
       <p id="team-msg"></p>
     </section>
     
-    <section>
+    <section id="vacancies">
       <h2>Вакансии</h2>
       <div id="vacancy-cards"></div>
       <button id="add-vacancy" class="secondary">+ добавить вакансию</button>
       <p id="vacancy-msg"></p>
     </section>
 
-    <section>
+    <section id="clients">
       <h2>Клиенты</h2>
       <div id="client-cards"></div>
       <button id="add-client" class="secondary">+ добавить клиента</button>
       <p id="client-msg"></p>
     </section>
 
-    <section>
+    <section id="gallery">
       <h2>Галерея</h2>
       <div id="gallery-cards"></div>
       <button id="add-gallery-item" class="secondary">+ добавить пост</button>
       <p id="gallery-msg"></p>
     </section>
 
-    <section>
+    <section id="bonuses">
       <h2>Плюшки и все такое</h2>
       <div id="bonuses-cards"></div>
       <button id="add-bonus" class="secondary">+ добавить бонус</button>
       <p id="bonus-msg"></p>
     </section>
 
-    <section>
+    <section id="form-section">
+      <h2>Форма</h2>
       <div id="form"></div>
       <button id="add-form"> сохранить форму</button>
       <p id="form-msg"></p>
     </section>
 
   </main>
-
+  <script src="/js/auth.js"></script>
   <script src="/js/admin_hero.js"></script>
   <script src="/js/admin_team.js"></script>
   <script src="/js/admin_vacancies.js"></script>
