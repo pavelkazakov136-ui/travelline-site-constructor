@@ -3,6 +3,7 @@ using SiteConstructor.Services;
 using Microsoft.EntityFrameworkCore;
 using SiteConstructor.Models;
 using System.Text.Json;
+using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -14,6 +15,26 @@ builder.Services.AddOpenApi();
 builder.Services.AddScoped<ContentService>();
 builder.Services.AddScoped<IDataStore, PostgresDataStore>();
 builder.Services.AddDbContext<AppDbContext>(o => o.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+    {
+        options.Cookie.Name = "SiteConstructor.Auth";
+        options.Cookie.HttpOnly = true;              
+        options.ExpireTimeSpan = TimeSpan.FromHours(8);
+        options.SlidingExpiration = true;               
+
+        options.Events.OnRedirectToLogin = ctx =>
+        {
+            ctx.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            return Task.CompletedTask;
+        };
+        options.Events.OnRedirectToAccessDenied = ctx =>
+        {
+            ctx.Response.StatusCode = StatusCodes.Status403Forbidden;
+            return Task.CompletedTask;
+        };
+    });
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -59,6 +80,8 @@ app.Use(async (context, next) =>
 });
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();    
 
 app.UseAuthorization();
 

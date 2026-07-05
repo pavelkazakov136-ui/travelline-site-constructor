@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using SiteConstructor.Models;
 using SiteConstructor.Services;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 
 public class ContentController : ControllerBase
@@ -12,6 +14,7 @@ public class ContentController : ControllerBase
     {
         _service = service;
     }
+    [AllowAnonymous] 
     [HttpGet]
     public async Task<IActionResult> Get()
     {

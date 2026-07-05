@@ -20,6 +20,8 @@ services:
       context: .            
       dockerfile: Dockerfile
     environment:
+      Admin__Username: "admin"
+      Admin__Password: "${ADMIN_PASSWORD}"
       ConnectionStrings__Default: "Host=db;Port=5432;Database=siteconstructor;Username=postgres;Password=dev"
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_HTTP_PORTS: "8080"
