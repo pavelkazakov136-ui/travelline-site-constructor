@@ -13,6 +13,7 @@ public class AppDbContext : DbContext
     public DbSet<GalleryItem> GalleryItems {get; set;}
     public DbSet<Bonus> Bonuses {get; set;}
     public DbSet<SiteSettings> SiteSettings {get; set;}
+    public DbSet<Submission> Submissions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {   
@@ -23,6 +24,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Client>().Property(c => c.Id).ValueGeneratedNever();
         modelBuilder.Entity<GalleryItem>().Property(g => g.Id).ValueGeneratedNever();
         modelBuilder.Entity<Bonus>().Property(b => b.Id).ValueGeneratedNever();
+        modelBuilder.Entity<Submission>().Property(s => s.Id).ValueGeneratedNever();
         modelBuilder.Entity<SiteSettings>()
 
         .Property(s => s.Hero)
