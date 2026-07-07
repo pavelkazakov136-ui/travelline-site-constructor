@@ -25,3 +25,13 @@ body {
   padding-left: 200px; 
 }
 
+section > h2 {
+  position: sticky;
+  top: 0;
+  background: var(--pico-background-color);
+  margin: 0 -1rem;      
+  padding: 0.75rem 1rem;
+  z-index: 10;          
+  border-bottom: 1px solid var(--pico-muted-border-color);
+}
+
