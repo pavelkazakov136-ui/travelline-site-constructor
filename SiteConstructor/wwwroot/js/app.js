@@ -148,4 +148,31 @@ function renderForm(form) {
   document.querySelector('.contact__submit').textContent = form.button;
 }
 
+document.querySelector('.contact__form').addEventListener('submit', async (event) => {
+    event.preventDefault();  
+
+    const form = event.target;
+    const inputs = form.querySelectorAll('.contact__input');
+    const submission = {
+        name: inputs[0].value,
+        phone: inputs[1].value,
+        email: inputs[2].value,
+        resume: inputs[3].value,
+        direction: inputs[4].value  
+    };
+
+    const res = await fetch('/api/submissions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(submission)
+    });
+
+    if (res.ok) {
+        form.reset();                        
+        alert('Спасибо! Заявка отправлена.'); 
+    } else {
+        alert('Ошибка отправки. Проверьте поля.');
+    }
+});
+
 loadContent();   
