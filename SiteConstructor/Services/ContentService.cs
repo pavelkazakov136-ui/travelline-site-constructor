@@ -187,4 +187,59 @@ public class ContentService
         return form;
 
     }
+
+    public async Task ReorderTeamAsync(List<int> orderedIds)
+    {
+        var content = await _store.ReadAsync();
+        for (int i = 0; i < orderedIds.Count; i++)
+        {
+            var member = content.Team.FirstOrDefault(m => m.Id == orderedIds[i]);
+            if (member != null) member.Order = i;
+        }
+        await _store.WriteAsync(content);
+    }
+
+    public async Task ReorderVacanciesAsync(List<int> orderedIds)
+    {
+        var content = await _store.ReadAsync();
+        for (int i = 0; i < orderedIds.Count; i++)
+        {
+            var item = content.Vacancies.FirstOrDefault(x => x.Id == orderedIds[i]);
+            if (item != null) item.Order = i;
+        }
+        await _store.WriteAsync(content);
+    }
+
+    public async Task ReorderClientsAsync(List<int> orderedIds)
+    {
+        var content = await _store.ReadAsync();
+        for (int i = 0; i < orderedIds.Count; i++)
+        {
+            var item = content.Clients.FirstOrDefault(x => x.Id == orderedIds[i]);
+            if (item != null) item.Order = i;
+        }
+        await _store.WriteAsync(content);
+    }
+
+    public async Task ReorderGalleryAsync(List<int> orderedIds)
+    {
+        var content = await _store.ReadAsync();
+        for (int i = 0; i < orderedIds.Count; i++)
+        {
+            var item = content.Gallery.FirstOrDefault(x => x.Id == orderedIds[i]);
+            if (item != null) item.Order = i;
+        }
+        await _store.WriteAsync(content);
+    }
+
+    public async Task ReorderBonusesAsync(List<int> orderedIds)
+    {
+        var content = await _store.ReadAsync();
+        for (int i = 0; i < orderedIds.Count; i++)
+        {
+            var item = content.Bonuses.FirstOrDefault(x => x.Id == orderedIds[i]);
+            if (item != null) item.Order = i;
+        }
+        await _store.WriteAsync(content);
+    }
 }

@@ -4,6 +4,17 @@ async function loadTeam() {
   renderTeamCards(data.team);
 }
 
+async function saveTeamOrder() {
+    const cards = document.querySelectorAll('#team-cards .team-card');
+    const orderedIds = Array.from(cards).map(card => Number(card.dataset.id));
+
+    await fetch('/api/content/team/reorder', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderedIds)
+    });
+}
+
 function renderTeamCards(team) {
   const box = document.getElementById('team-cards');
   box.innerHTML = team.map(m => `
@@ -16,6 +27,10 @@ function renderTeamCards(team) {
       <button type="button" data-action="delete" data-id="${m.id}" class="secondary">✕</button>
     </div>
   `).join('');
+  Sortable.create(box, {
+    animation: 150,
+    onEnd: saveTeamOrder
+  });
 }
 
 function collectCard(card){

@@ -26,6 +26,7 @@ public class Stat
 
 public class TeamMember
 {
+    public int Order { get; set; }
     public int Id{get; set;}
     public string Name{get; set;} = "";
     public string Position{get; set;} = "";
@@ -34,6 +35,7 @@ public class TeamMember
 
 public class Vacancy
 {
+    public int Order { get; set; }
     public int Id{get; set;}
     public string Title{get; set;} = "";
     public string Format{get; set;} = "";
@@ -42,6 +44,7 @@ public class Vacancy
 
 public class Client
 {
+    public int Order { get; set; }
     public int Id{get; set;}
     public string Logo{get; set;} = "";
     public string Name{get; set;} = "";
@@ -56,6 +59,7 @@ public class Form
 
 public class GalleryItem
 {
+    public int Order { get; set; }
     public int Id{get; set;}
     public string Title{get; set;} = "";
     public string Media{get; set;} = "";
@@ -64,6 +68,7 @@ public class GalleryItem
 
 public class Bonus
 {
+    public int Order { get; set; }
     public int Id{get; set;}
     public string Title{get; set;} = "";
     public string Subtitle{get; set;} = "";

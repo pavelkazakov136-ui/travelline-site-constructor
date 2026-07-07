@@ -3,6 +3,15 @@ async function loadVacancies(){
     const data = await res.json();
     renderVacanci(data.vacancies);
 }
+async function saveVacanciesOrder() {
+    const cards = document.querySelectorAll('#vacancy-cards .vacancy-card');
+    const orderedIds = Array.from(cards).map(c => Number(c.dataset.id));
+    await fetch('/api/content/vacancies/reorder', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderedIds)
+    });
+}
 
 function renderVacanci(vacancies){
     const box = document.getElementById("vacancy-cards")
@@ -16,6 +25,10 @@ function renderVacanci(vacancies){
             <button type="button" data-action="delete" data-id="${m.id}" class="secondary">✕</button>
         </div>`
     ).join('');
+    Sortable.create(box, {
+        animation: 150,
+        onEnd: saveVacanciesOrder
+    });
 }
 
 function collectVacancy(vacancy){

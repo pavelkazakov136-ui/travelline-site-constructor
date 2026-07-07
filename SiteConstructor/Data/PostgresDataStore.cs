@@ -18,11 +18,11 @@ public class PostgresDataStore : IDataStore{
             {
                 Hero = settings?.Hero ?? new Hero(),
                 Form = settings?.Form ?? new Form(),
-                Team = await _db.TeamMembers.OrderBy(m => m.Id).ToListAsync(),
-                Vacancies = await _db.Vacancies.OrderBy(v => v.Id).ToListAsync(),
-                Clients = await _db.Clients.OrderBy(c => c.Id).ToListAsync(),
-                Gallery = await _db.GalleryItems.OrderBy(g => g.Id).ToListAsync(),
-                Bonuses = await _db.Bonuses.OrderBy(b => b.Id).ToListAsync(),
+                Team = await _db.TeamMembers.OrderBy(m => m.Order).ToListAsync(),
+                Vacancies = await _db.Vacancies.OrderBy(v => v.Order).ToListAsync(),
+                Clients = await _db.Clients.OrderBy(c => c.Order).ToListAsync(),
+                Gallery = await _db.GalleryItems.OrderBy(g => g.Order).ToListAsync(),
+                Bonuses = await _db.Bonuses.OrderBy(b => b.Order).ToListAsync(),
             };
         }
 

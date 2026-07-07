@@ -135,4 +135,39 @@ public class ContentController : ControllerBase
         var updated = await _service.UpdateFormAsync(form);
         return Ok(updated);
     }
+
+    [HttpPut("team/reorder")]
+    public async Task<IActionResult> ReorderTeam([FromBody] List<int> orderedIds)
+    {
+        await _service.ReorderTeamAsync(orderedIds);
+        return NoContent();
+    }
+
+    [HttpPut("vacancies/reorder")]
+    public async Task<IActionResult> ReorderVacancies([FromBody] List<int> orderedIds)
+    { 
+        await _service.ReorderVacanciesAsync(orderedIds); 
+        return NoContent(); 
+    }
+
+    [HttpPut("clients/reorder")]
+    public async Task<IActionResult> ReorderClients([FromBody] List<int> orderedIds)
+    { 
+        await _service.ReorderClientsAsync(orderedIds); 
+        return NoContent(); 
+    }
+
+    [HttpPut("gallery/reorder")]
+    public async Task<IActionResult> ReorderGallery([FromBody] List<int> orderedIds)
+    { 
+        await _service.ReorderGalleryAsync(orderedIds); 
+        return NoContent(); 
+    }
+
+    [HttpPut("bonuses/reorder")]
+    public async Task<IActionResult> ReorderBonuses([FromBody] List<int> orderedIds)
+    { 
+        await _service.ReorderBonusesAsync(orderedIds); 
+        return NoContent(); 
+    }
 } 

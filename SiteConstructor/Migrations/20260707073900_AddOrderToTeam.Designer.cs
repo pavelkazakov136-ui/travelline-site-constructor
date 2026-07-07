@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SiteConstructor.Data;
@@ -11,9 +12,11 @@ using SiteConstructor.Data;
 namespace SiteConstructor.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260707073900_AddOrderToTeam")]
+    partial class AddOrderToTeam
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,9 +28,6 @@ namespace SiteConstructor.Migrations
             modelBuilder.Entity("SiteConstructor.Models.Bonus", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Order")
                         .HasColumnType("integer");
 
                     b.Property<string>("Subtitle")
@@ -56,9 +56,6 @@ namespace SiteConstructor.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Order")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.ToTable("Clients");
@@ -72,9 +69,6 @@ namespace SiteConstructor.Migrations
                     b.Property<string>("Media")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -175,9 +169,6 @@ namespace SiteConstructor.Migrations
                     b.Property<string>("Format")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Title")
                         .IsRequired()

@@ -3,6 +3,15 @@ async function loadBonuses() {
   const data = await res.json();
   renderBonusesCards(data.bonuses);
 }
+async function saveBonusesOrder() {
+    const cards = document.querySelectorAll('#bonuses-cards .bonus-card');
+    const orderedIds = Array.from(cards).map(c => Number(c.dataset.id));
+    await fetch('/api/content/bonuses/reorder', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderedIds)
+    });
+}
 
 function renderBonusesCards(bonuses){
     const box = document.getElementById("bonuses-cards");
@@ -15,6 +24,10 @@ function renderBonusesCards(bonuses){
             <button type="button" data-action="delete" data-id="${b.id}" class="secondary">✕</button>
         </div>`
     ).join('');
+    Sortable.create(box, {
+        animation: 150,
+        onEnd: saveBonusesOrder
+    });
 }
 
 function collectBonuses(bonus){

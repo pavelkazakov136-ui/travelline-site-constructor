@@ -3,7 +3,15 @@ async function loadGallery() {
   const data = await res.json();
   renderGalleryCards(data.gallery);
 }
-
+async function saveGalleryOrder() {
+    const cards = document.querySelectorAll('#gallery-cards .gallery-card');
+    const orderedIds = Array.from(cards).map(c => Number(c.dataset.id));
+    await fetch('/api/content/gallery/reorder', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderedIds)
+    });
+}
 function renderGalleryCards(gallery){
     const box = document.getElementById("gallery-cards");
     box.innerHTML = gallery.map(g => `
@@ -15,6 +23,10 @@ function renderGalleryCards(gallery){
             <button type="button" data-action="delete" data-id="${g.id}" class="secondary">✕</button>
         </div>`
     ).join('');
+    Sortable.create(box, {
+        animation: 150,
+        onEnd: saveGalleryOrder
+    });
 }
 
 function collectGallery(gallery){

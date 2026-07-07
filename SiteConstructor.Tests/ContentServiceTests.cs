@@ -474,4 +474,132 @@ public class ContentServiceTests
         Assert.Equal("удалённо", vacancy.Format);
         Assert.Equal("https://hh.ru/1", vacancy.Url);
     }
+
+    [Fact]
+    public async Task ReorderTeam_ReassignsOrderByPosition()
+    {
+        var store = new FakeDataStore(new Content
+        {
+            Team = new List<TeamMember>
+            {
+                new TeamMember { Id = 1, Name = "A" },
+                new TeamMember { Id = 2, Name = "B" },
+                new TeamMember { Id = 3, Name = "C" }
+            }
+        });
+        var service = new ContentService(store);
+
+        await service.ReorderTeamAsync(new List<int> { 3, 1, 2 }); 
+
+        var after = await store.ReadAsync();
+        Assert.Equal(0, after.Team.First(m => m.Id == 3).Order);
+        Assert.Equal(1, after.Team.First(m => m.Id == 1).Order);
+        Assert.Equal(2, after.Team.First(m => m.Id == 2).Order);
+    }
+        [Fact]
+    public async Task ReorderVacancies_ReassignsOrderByPosition()
+    {
+        var store = new FakeDataStore(new Content
+        {
+            Vacancies = new List<Vacancy>
+            {
+                new Vacancy { Id = 1, Title = "A" },
+                new Vacancy { Id = 2, Title = "B" },
+                new Vacancy { Id = 3, Title = "C" }
+            }
+        });
+        var service = new ContentService(store);
+
+        await service.ReorderVacanciesAsync(new List<int> { 3, 1, 2 });
+
+        var after = await store.ReadAsync();
+        Assert.Equal(0, after.Vacancies.First(x => x.Id == 3).Order);
+        Assert.Equal(1, after.Vacancies.First(x => x.Id == 1).Order);
+        Assert.Equal(2, after.Vacancies.First(x => x.Id == 2).Order);
+    }
+
+    [Fact]
+    public async Task ReorderClients_ReassignsOrderByPosition()
+    {
+        var store = new FakeDataStore(new Content
+        {
+            Clients = new List<Client>
+            {
+                new Client { Id = 1, Name = "A" },
+                new Client { Id = 2, Name = "B" },
+                new Client { Id = 3, Name = "C" }
+            }
+        });
+        var service = new ContentService(store);
+
+        await service.ReorderClientsAsync(new List<int> { 2, 3, 1 });
+
+        var after = await store.ReadAsync();
+        Assert.Equal(0, after.Clients.First(x => x.Id == 2).Order);
+        Assert.Equal(1, after.Clients.First(x => x.Id == 3).Order);
+        Assert.Equal(2, after.Clients.First(x => x.Id == 1).Order);
+    }
+
+    [Fact]
+    public async Task ReorderGallery_ReassignsOrderByPosition()
+    {
+        var store = new FakeDataStore(new Content
+        {
+            Gallery = new List<GalleryItem>
+            {
+                new GalleryItem { Id = 1, Title = "A" },
+                new GalleryItem { Id = 2, Title = "B" },
+                new GalleryItem { Id = 3, Title = "C" }
+            }
+        });
+        var service = new ContentService(store);
+
+        await service.ReorderGalleryAsync(new List<int> { 3, 2, 1 });
+
+        var after = await store.ReadAsync();
+        Assert.Equal(0, after.Gallery.First(x => x.Id == 3).Order);
+        Assert.Equal(1, after.Gallery.First(x => x.Id == 2).Order);
+        Assert.Equal(2, after.Gallery.First(x => x.Id == 1).Order);
+    }
+
+    [Fact]
+    public async Task ReorderBonuses_ReassignsOrderByPosition()
+    {
+        var store = new FakeDataStore(new Content
+        {
+            Bonuses = new List<Bonus>
+            {
+                new Bonus { Id = 1, Title = "A" },
+                new Bonus { Id = 2, Title = "B" },
+                new Bonus { Id = 3, Title = "C" }
+            }
+        });
+        var service = new ContentService(store);
+
+        await service.ReorderBonusesAsync(new List<int> { 2, 1, 3 });
+
+        var after = await store.ReadAsync();
+        Assert.Equal(0, after.Bonuses.First(x => x.Id == 2).Order);
+        Assert.Equal(1, after.Bonuses.First(x => x.Id == 1).Order);
+        Assert.Equal(2, after.Bonuses.First(x => x.Id == 3).Order);
+    }
+    [Fact]
+    public async Task ReorderTeam_WithUnknownId_IgnoresItAndDoesNotThrow()
+    {
+        var store = new FakeDataStore(new Content
+        {
+            Team = new List<TeamMember>
+            {
+                new TeamMember { Id = 1, Name = "A" },
+                new TeamMember { Id = 2, Name = "B" }
+            }
+        });
+        var service = new ContentService(store);
+
+        await service.ReorderTeamAsync(new List<int> { 2, 999, 1 });
+
+        var after = await store.ReadAsync();
+        Assert.Equal(0, after.Team.First(x => x.Id == 2).Order);
+        Assert.Equal(2, after.Team.First(x => x.Id == 1).Order);
+    }
 }

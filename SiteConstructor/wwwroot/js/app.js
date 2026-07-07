@@ -49,7 +49,6 @@ function setupStatsScroll() {
 }
 
 function renderTeam(team) {
-  team.sort((a, b) => a.id - b.id);
   const team__track = document.querySelector('.team__track')
   let htmlContent = team.map(personality => 
     `<li class="team__card">
@@ -64,7 +63,6 @@ function renderTeam(team) {
 }
 
 function renderVacancies(vacancies){
-  vacancies.sort((a, b) => a.id - b.id);
   const vacancies__list = document.querySelector('.vacancies__list');
   let htmlContent = vacancies.map(vacancy => 
     `<li class="vacancies__item">
@@ -86,7 +84,6 @@ function renderVacancies(vacancies){
 }
 
 function renderClients(clients) {
-  clients.sort((a, b) => a.id - b.id);
   const track = document.querySelector('.clients__track');
   const renderItem = (client, isDuplicate = false) => `
     <li class="clients__item" ${isDuplicate ? 'aria-hidden="true"' : ''}>

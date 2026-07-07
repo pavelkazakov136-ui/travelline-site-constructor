@@ -4,6 +4,16 @@ async function loadClients() {
   renderClientsCards(data.clients);
 }
 
+async function saveClientsOrder() {
+    const cards = document.querySelectorAll('#client-cards .client-card');
+    const orderedIds = Array.from(cards).map(c => Number(c.dataset.id));
+    await fetch('/api/content/clients/reorder', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderedIds)
+    });
+}
+
 function renderClientsCards(clients){
     const box = document.getElementById("client-cards");
     box.innerHTML = clients.map(c => `
@@ -15,6 +25,10 @@ function renderClientsCards(clients){
             <button type="button" data-action="delete" data-id="${c.id}" class="secondary">✕</button>
         </div>`
     ).join('');
+    Sortable.create(box, {
+        animation: 150,
+        onEnd: saveClientsOrder
+    });
 }
 
 function collectClients(client){
