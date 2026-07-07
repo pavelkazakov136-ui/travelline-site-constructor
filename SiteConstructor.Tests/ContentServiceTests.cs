@@ -452,4 +452,26 @@ public class ContentServiceTests
         await Assert.ThrowsAsync<ArgumentException>(() =>
             service.AddBonusAsync(new Bonus { Title = "", Subtitle = "x" }));
     }
+    
+    [Fact]
+    public async Task UpdateVacancy_WhenExists_ChangesArePersisted()
+    {
+        var store = new FakeDataStore(new Content
+        {
+            Vacancies = new List<Vacancy>
+            {
+                new Vacancy { Id = 1, Title = "Старая вакансия", Format = "офис", Url = "" }
+            }
+        });
+        var service = new ContentService(store);
+
+        await service.UpdateVacancyAsync(1,
+            new Vacancy { Title = "Новая вакансия", Format = "удалённо", Url = "https://hh.ru/1" });
+
+        var after = await store.ReadAsync();
+        var vacancy = Assert.Single(after.Vacancies);
+        Assert.Equal("Новая вакансия", vacancy.Title);
+        Assert.Equal("удалённо", vacancy.Format);
+        Assert.Equal("https://hh.ru/1", vacancy.Url);
+    }
 }
