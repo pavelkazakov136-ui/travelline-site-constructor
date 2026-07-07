@@ -24,7 +24,6 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Client>().Property(c => c.Id).ValueGeneratedNever();
         modelBuilder.Entity<GalleryItem>().Property(g => g.Id).ValueGeneratedNever();
         modelBuilder.Entity<Bonus>().Property(b => b.Id).ValueGeneratedNever();
-        modelBuilder.Entity<Submission>().Property(s => s.Id).ValueGeneratedNever();
         modelBuilder.Entity<SiteSettings>()
 
         .Property(s => s.Hero)

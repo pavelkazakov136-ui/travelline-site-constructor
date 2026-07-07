@@ -15,6 +15,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddScoped<ContentService>();
 builder.Services.AddScoped<IDataStore, PostgresDataStore>();
 builder.Services.AddDbContext<AppDbContext>(o => o.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+builder.Services.AddScoped<ISubmissionStore, PostgresSubmissionStore>();
+builder.Services.AddScoped<SubmissionService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
     {
