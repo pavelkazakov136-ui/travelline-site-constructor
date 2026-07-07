@@ -38,12 +38,19 @@ function collectBonuses(bonus){
 }
 
 async function addBonus(){
+    const cards = document.querySelectorAll('#bonuses-cards .bonus-card');
+    const nextOrder = cards.length + 1;
+
     const res = await fetch('/api/content/bonuses',{
         method:'POST',
-        headers:{'content-Type': 'application/json'},
-        body: JSON.stringify({title: 'Заголовок', subtitle: ''})
+        headers:{'Content-Type': 'application/json'}, 
+        body: JSON.stringify({
+            title: 'Заголовок', 
+            subtitle: '',
+            order: nextOrder 
+        })
     });
-    if (res.ok) loadBonuses()
+    if (res.ok) loadBonuses();
 }
 
 async function saveBonus(id){

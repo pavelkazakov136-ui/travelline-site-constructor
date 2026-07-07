@@ -40,12 +40,20 @@ function collectVacancy(vacancy){
 }
 
 async function addVacancy(){
+    const cards = document.querySelectorAll('#vacancy-cards .vacancy-card');
+    const nextOrder = cards.length + 1;
+
     const res = await fetch("/api/content/vacancies",{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: 'Название', format: '', url: '' })
-  });
-  if (res.ok) loadVacancies();
+        body: JSON.stringify({ 
+            title: 'Название', 
+            format: '', 
+            url: '',
+            order: nextOrder
+        })
+    });
+    if (res.ok) loadVacancies();
 }
 
 async function saveVacancy(id) {

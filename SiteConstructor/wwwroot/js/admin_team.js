@@ -43,11 +43,20 @@ function collectCard(card){
 
 
 async function addMember() {
+  const cards = document.querySelectorAll('#team-cards .team-card');
+  const nextOrder = cards.length + 1
+
   const res = await fetch('/api/content/team', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: 'Имя', position: '', photo: '' })
+    body: JSON.stringify({ 
+      name: 'Имя', 
+      position: '', 
+      photo: '',
+      order: nextOrder 
+    })
   });
+  
   if (res.ok) loadTeam();  
 }
 

@@ -39,12 +39,19 @@ function collectClients(client){
 }
 
 async function addClient(){
+    const cards = document.querySelectorAll('#client-cards .client-card');
+    const nextOrder = cards.length + 1;
+
     const res = await fetch('/api/content/clients',{
         method:'POST',
-        headers:{'content-Type': 'application/json'},
-        body: JSON.stringify({logo: '', name: 'Название'})
+        headers:{'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            logo: '', 
+            name: 'Название',
+            order: nextOrder
+        })
     });
-    if (res.ok) loadClients()
+    if (res.ok) loadClients();
 }
 
 async function saveClient(id){

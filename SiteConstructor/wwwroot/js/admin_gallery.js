@@ -37,13 +37,21 @@ function collectGallery(gallery){
 }
 
 async function addGallery(){
+    const cards = document.querySelectorAll('#gallery-cards .gallery-card');
+    const nextOrder = cards.length + 1;
+
     const res = await fetch('/api/content/gallery',{
         method:'POST',
-        headers:{'content-Type': 'application/json'},
-        body: JSON.stringify({title: 'Текс', media: ''})
+        headers:{'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            title: 'Текс', 
+            media: '',
+            order: nextOrder
+        })
     });
-    if (res.ok) loadGallery()
+    if (res.ok) loadGallery();
 }
+
 
 async function saveGallery(id){
     const gallery = document.querySelector(`.gallery-card[data-id="${id}"]`)
