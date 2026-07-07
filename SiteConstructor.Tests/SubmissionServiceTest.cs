@@ -30,8 +30,6 @@ public class SubmissionServiceTests
     {
         var store = new FakeSubmissionStore();
         var service = new SubmissionService(store);
-
-        // валидная во всём, КРОМЕ имени
         await Assert.ThrowsAsync<ArgumentException>(() =>
             service.AddAsync(new Submission
             {
@@ -76,6 +74,36 @@ public class SubmissionServiceTests
 
         Assert.Equal("Новая", all[0].Name);
         Assert.Equal("Старая", all[1].Name);
+    }
+
+    [Fact]
+    public async Task DeleteAsync_RemovesOnlyTargetSubmission()
+    {
+        var store = new FakeSubmissionStore();
+        var service = new SubmissionService(store);
+
+        var first  = await store.AddAsync(new Submission { Name = "Первая" });
+        var second = await store.AddAsync(new Submission { Name = "Вторая" });
+
+        await service.DeleteAsync(first.Id);
+
+        var all = await store.GetAllAsync();
+        Assert.Single(all);
+        Assert.Equal(second.Id, all[0].Id);
+    }
+
+        [Fact]
+    public async Task DeleteAsync_NonExistentId_DoesNotThrow_AndKeepsData()
+    {
+        var store = new FakeSubmissionStore();
+        var service = new SubmissionService(store);
+
+        await store.AddAsync(new Submission { Name = "Первая" });
+
+        await service.DeleteAsync(999);
+
+        var all = await store.GetAllAsync();
+        Assert.Single(all);
     }
 
 }

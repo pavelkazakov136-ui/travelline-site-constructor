@@ -21,4 +21,10 @@ public class PostgresSubmissionStore : ISubmissionStore{
         .OrderByDescending(s => s.CreatedAt)
         .ToListAsync();
     }
+    public async Task DeleteAsync(int id)
+{
+    await _db.Submissions
+        .Where(s => s.Id == id)
+        .ExecuteDeleteAsync();
+}
 }

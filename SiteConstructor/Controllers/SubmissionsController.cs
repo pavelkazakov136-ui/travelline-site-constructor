@@ -28,4 +28,12 @@ public class SubmissionsController : ControllerBase
         var all = await _service.GetAllAsync();
         return Ok(all);
     }
+
+    [HttpDelete]
+[HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await _service.DeleteAsync(id);
+        return NoContent();   
+    }
 }

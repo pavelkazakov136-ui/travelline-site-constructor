@@ -19,4 +19,9 @@ public class FakeSubmissionStore : ISubmissionStore
     {
         return Task.FromResult(_items.OrderByDescending(s => s.CreatedAt).ToList());
     }
+    public Task DeleteAsync(int id)
+{
+    _items.RemoveAll(s => s.Id == id);
+    return Task.CompletedTask;
+}
 }

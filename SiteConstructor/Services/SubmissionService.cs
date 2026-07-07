@@ -34,5 +34,9 @@ public class SubmissionService
         return await _store.GetAllAsync();
     }
 
+    public async Task DeleteAsync(int id)
+    {
+        await _store.DeleteAsync(id);
+    }
 
 }
