@@ -23,7 +23,7 @@ function renderHero(hero) {
 
 function renderStatValue(value) {
   return value.endsWith('.svg')
-    ? `<img class="stats__value-logo" src="images/${value}" alt="TravelLine">`
+    ? `<img class="stats__value-logo" src="/images/${value}" alt="TravelLine">`
     : value;
 }
 
@@ -53,7 +53,7 @@ function renderTeam(team) {
   const team__track = document.querySelector('.team__track')
   let htmlContent = team.map(personality => 
     `<li class="team__card">
-          <img class="team__photo" src="${personality.photo}" alt="${personality.name}" />
+          <img class="team__photo" src="/images/${personality.photo}" alt="${personality.name}" />
           <div class="team__meta">
             <span class="team__name">${personality.name}</span>
             <span class="team__role">${personality.position}</span>
@@ -90,7 +90,7 @@ function renderClients(clients) {
   const track = document.querySelector('.clients__track');
   const renderItem = (client, isDuplicate = false) => `
     <li class="clients__item" ${isDuplicate ? 'aria-hidden="true"' : ''}>
-      <img class="clients__logo" src="images/${client.logo}" alt="${client.name}" />
+      <img class="clients__logo" src="/images/${client.logo}" alt="${client.name}" />
     </li>`;
 
   const original  = clients.map(c => renderItem(c)).join('');
@@ -108,8 +108,8 @@ function renderGallery(gallery) {
   const renderMedia = (item) => {
     const isVideo = item.media.endsWith('.mp4');
     return isVideo
-      ? `<video class="gallery__media" src="${item.media}" autoplay muted loop playsinline></video>`
-      : `<img class="gallery__media" src="${item.media}" alt="" loading="lazy">`;
+      ? `<video class="gallery__media" src="/images/${item.media}" autoplay muted loop playsinline></video>`
+      : `<img class="gallery__media" src="/images/${item.media}" alt="" loading="lazy">`;
   };
 
   grid.innerHTML = cols.map(col => `
